@@ -33,10 +33,6 @@ class Filter extends Component {
         moment(createTime[0]).format('YYYY-MM-DD'),
         moment(createTime[1]).format('YYYY-MM-DD'),
       ]
-      
-      // fields.queryStartDate = moment(createTime[0]).format('YYYY-MM-DD');  
-      // fields.queryEndDate = moment(createTime[0]).format('YYYY-MM-DD');
-      // delete fields.createTime
     }
     return fields
   }

@@ -42,9 +42,6 @@ class User extends PureComponent {
       loading: loading.effects['user/query'],
       pagination,
       onChange: page => {
-
-        
-
         this.handleRefresh({
           current: page.current,
           size: page.pageSize,
@@ -96,13 +93,7 @@ class User extends PureComponent {
       filter: {
         ...query,
       },
-      onFilterChange: value => {
-        if (value && value.createTime && value.createTime.length > 0) {
-          value.queryStartDate = moment(value.createTime[0]).format('YYYY-MM-DD');  
-          value.queryEndDate = moment(value.createTime[0]).format('YYYY-MM-DD');
-                delete value.createTime
-        }
-       
+      onFilterChange: value => {     
         this.handleRefresh({
           ...value,
         })

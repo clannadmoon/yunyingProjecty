@@ -7,6 +7,7 @@ import modelExtend from 'dva-model-extend'
 const { pathToRegexp } = require("path-to-regexp")
 import api from 'api'
 import { pageModel } from 'utils/model'
+import moment from 'moment'
 
 const {
   queryUserList,
@@ -36,7 +37,17 @@ export default modelExtend(pageModel, {
           console.log("========================================location.query:", location.query)
           let payload = {}
           if (Object.keys(location.query).length > 0) {
-            payload = location.query
+
+            let obj = location.query
+            payload = {
+              ...obj,
+            }
+
+            if (obj && obj.createTime && obj.createTime.length > 0) {
+              payload.queryStartDate = moment(obj.createTime[0]).format('YYYY-MM-DD');  
+              payload.queryEndDate = moment(obj.createTime[1]).format('YYYY-MM-DD');   
+              delete payload.createTime
+            }
           } else {
             payload = { current: 1, size: 10 }
           }
