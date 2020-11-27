@@ -9,7 +9,7 @@ import { stringify } from 'qs'
 import List from './components/List'
 import Filter from './components/Filter'
 import Modal from './components/Modal'
-
+import moment from 'moment'
 @withI18n()
 @connect(({ user, loading }) => ({ user, loading }))
 class User extends PureComponent {
@@ -30,101 +30,59 @@ class User extends PureComponent {
   }
 
   handleDeleteItems = () => {
-    const { dispatch, user } = this.props
-    const { list, pagination, selectedRowKeys } = user
 
-    dispatch({
-      type: 'user/multiDelete',
-      payload: {
-        ids: selectedRowKeys,
-      },
-    }).then(() => {
-      this.handleRefresh({
-        page:
-          list.length === selectedRowKeys.length && pagination.current > 1
-            ? pagination.current - 1
-            : pagination.current,
-      })
-    })
-  }
-
-  get modalProps() {
-    const { dispatch, user, loading, i18n } = this.props
-    const { currentItem, modalVisible, modalType } = user
-
-    return {
-      i18n,
-      item: modalType === 'create' ? {} : currentItem,
-      visible: modalVisible,
-      destroyOnClose: true,
-      maskClosable: false,
-      confirmLoading: loading.effects[`user/${modalType}`],
-      title: `${
-        modalType === 'create' ? i18n.t`Create User` : i18n.t`Update User`
-      }`,
-      centered: true,
-      onOk: data => {
-        dispatch({
-          type: `user/${modalType}`,
-          payload: data,
-        }).then(() => {
-          this.handleRefresh()
-        })
-      },
-      onCancel() {
-        dispatch({
-          type: 'user/hideModal',
-        })
-      },
-    }
   }
 
   get listProps() {
     const { dispatch, user, loading } = this.props
-    const { list, pagination, selectedRowKeys } = user
+    const { list, pagination } = user
 
     return {
       dataSource: list,
       loading: loading.effects['user/query'],
       pagination,
       onChange: page => {
+
+        
+
         this.handleRefresh({
-          page: page.current,
-          pageSize: page.pageSize,
+          current: page.current,
+          size: page.pageSize,
         })
       },
-      // onDeleteItem: id => {
-      //   dispatch({
-      //     type: 'user/delete',
-      //     payload: id,
-      //   }).then(() => {
-      //     this.handleRefresh({
-      //       page:
-      //         list.length === 1 && pagination.current > 1
-      //           ? pagination.current - 1
-      //           : pagination.current,
-      //     })
-      //   })
-      // },
-      onEditItem(item) {
+      onChangeStatus: payload => {
+        dispatch({
+          type: 'user/changeStatus',
+          payload,
+        }).then(() => {
+          this.handleRefresh({
+            current:
+              list.length === 1 && pagination.current > 1
+                ? pagination.current
+                : pagination.current,
+          })
+        })
+      },
+      onChangeDate: item => {
         dispatch({
           type: 'user/showModal',
           payload: {
-            modalType: 'update',
             currentItem: item,
           },
         })
       },
-      rowSelection: {
-        selectedRowKeys,
-        onChange: keys => {
-          dispatch({
-            type: 'user/updateState',
-            payload: {
-              selectedRowKeys: keys,
-            },
-          })
-        },
+      onEditItem(item) {
+        history.push({
+          pathname: `/userAdd`,
+          query: item,
+        })
+        // dispatch({
+        //   type: 'user/showModal',
+        //   payload: {
+        //     modalType: 'update',
+        //     currentItem: item,
+        //   },
+        // })
       },
     }
   }
@@ -139,6 +97,12 @@ class User extends PureComponent {
         ...query,
       },
       onFilterChange: value => {
+        if (value && value.createTime && value.createTime.length > 0) {
+          value.queryStartDate = moment(value.createTime[0]).format('YYYY-MM-DD');  
+          value.queryEndDate = moment(value.createTime[0]).format('YYYY-MM-DD');
+                delete value.createTime
+        }
+       
         this.handleRefresh({
           ...value,
         })
@@ -149,10 +113,37 @@ class User extends PureComponent {
     }
   }
 
+  get modalProps() {
+    const { dispatch, user, loading, i18n } = this.props
+    const { currentItem, modalVisible } = user
+
+    return { 
+      item: currentItem,
+      visible: modalVisible,
+      destroyOnClose: true,
+      maskClosable: false,
+      //confirmLoading: loading.effects[`user/changeOperateDate`],
+      title: `设置运营有效时间`,
+      centered: true,
+      onOk: data => {
+        console.log('data',data)
+        dispatch({
+          type: 'user/changeOperateDate',
+          payload: data,
+        }).then(() => {
+          this.handleRefresh()
+        })
+      },
+      onCancel() {
+        dispatch({
+          type: 'user/hideModal',
+        })
+      },
+    }
+  }
+
   render() {
     const { user } = this.props
-    const { selectedRowKeys } = user
-
     return (
       <Page inner>
         <Filter {...this.filterProps} />

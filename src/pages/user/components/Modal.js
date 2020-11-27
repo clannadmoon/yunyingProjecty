@@ -1,10 +1,19 @@
+/*
+ * @Description: 这里输入文件功能
+ * @Author: zhoupeng
+ * @Date: 2020-11-25 20:27:28
+ */
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Input, InputNumber, Radio, Modal, Cascader } from 'antd'
+import { Form, Input, InputNumber, Radio,DatePicker, Modal, Cascader } from 'antd'
 import { Trans } from '@lingui/react'
 import city from 'utils/city'
+import moment from 'moment'
 
+const { RangePicker } = DatePicker;
 const FormItem = Form.Item
+const dateFormat = 'YYYY/MM/DD';
+
 
 const formItemLayout = {
   labelCol: {
@@ -16,69 +25,73 @@ const formItemLayout = {
 }
 
 class UserModal extends PureComponent {
-  formRef = React.createRef()
+  constructor(props) {
+    super(props)
+    this.state = {
+      startTime:moment().subtract(3, 'months'),
+      endTime:moment().add(3, 'months'),
+    }
+  }
 
   handleOk = () => {
     const { item = {}, onOk } = this.props
+    const { startTime,endTime } = this.state
+    
+    let params = {
+      operateCode: item.operateCode,
+      startTime: moment(startTime).format('YYYY-MM-DD HH:MM:SS'),
+      endTime: moment(endTime).format('YYYY-MM-DD HH:MM:SS'),
+    }
+    onOk(params)
+  }
 
-    this.formRef.current.validateFields()
-      .then(values => {
-        const data = {
-          ...values,
-          key: item.key,
-        }
-        data.address = data.address.join(' ')
-        onOk(data)
-      })
-      .catch(errorInfo => {
-        console.log(errorInfo)
-      })
+  onChangeStartTime = (value) => {
+    console.log(value)
+    this.setState({
+      startTime:value
+    })
+  }
+  onChangeEndTime = (value) => {
+    console.log(value)
+    this.setState({
+      endTime:value
+    })
   }
 
   render() {
-    const { i18n, item = {}, onOk, form, ...modalProps } = this.props
-
+    const {  item = {}, onOk, form, ...modalProps } = this.props
+    const { startTime,endTime } = this.state
     return (
       <Modal {...modalProps} onOk={this.handleOk}>
-        <Form ref={this.formRef} name="control-ref" initialValues={{ ...item, address: item.address && item.address.split(' ') }} layout="horizontal">
+        <Form  name="control-ref" layout="horizontal">
           <FormItem name='name' rules={[{ required: true }]}
-            label={i18n.t`Name`} hasFeedback {...formItemLayout}>
-            <Input />
-          </FormItem>
-          <FormItem name='nickName' rules={[{ required: true }]}
-            label={i18n.t`NickName`} hasFeedback {...formItemLayout}>
-            <Input />
-          </FormItem>
-          <FormItem name='isMale' rules={[{ required: true }]}
-            label={i18n.t`Gender`} hasFeedback {...formItemLayout}>
-            <Radio.Group>
-              <Radio value>
-                <Trans>Male</Trans>
-              </Radio>
-              <Radio value={false}>
-                <Trans>Female</Trans>
-              </Radio>
-            </Radio.Group>
-          </FormItem>
-          <FormItem name='age' label={i18n.t`Age`} hasFeedback {...formItemLayout}>
-            <InputNumber min={18} max={100} />
-          </FormItem>
-          <FormItem name='phone' rules={[{ required: true, pattern: /^1[34578]\d{9}$/, message: i18n.t`The input is not valid phone!`, }]}
-            label={i18n.t`Phone`} hasFeedback {...formItemLayout}>
-            <Input />
-          </FormItem>
-          <FormItem name='email' rules={[{ required: true, pattern: /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/, message: i18n.t`The input is not valid E-mail!`, }]}
-            label={i18n.t`Email`} hasFeedback {...formItemLayout}>
-            <Input />
-          </FormItem>
-          <FormItem name='address' rules={[{ required: true, }]}
-            label={i18n.t`Address`} hasFeedback {...formItemLayout}>
-            <Cascader
-              style={{ width: '100%' }}
-              options={city}
-              placeholder={i18n.t`Pick an address`}
+            label='运营开始时间'  {...formItemLayout}>
+            <DatePicker
+              defaultValue={startTime}
+              format={dateFormat}
+              disabledDate={(current) => {
+                  // Can not select days before today and today
+                
+                console.log('current',current)
+                  return current && current > moment().endOf('day');
+              }}
+              onChange={this.onChangeStartTime}
             />
           </FormItem>
+          <FormItem name='name' rules={[{ required: true }]}
+          label='运营结束时间'  {...formItemLayout}>
+          <DatePicker
+            defaultValue={endTime}
+              format={dateFormat}
+              disabledDate={(current) => {
+                console.log('current',current)
+                // Can not select days before today and today
+                return current && current < moment().endOf('day');
+             }}
+            onChange={this.onChangeEndTime}
+          />
+        </FormItem>
+          
         </Form>
       </Modal>
     )

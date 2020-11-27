@@ -81,7 +81,7 @@ class Login extends PureComponent {
         <div className={styles.form}>
           <div className={styles.logo}>
             {/* <img alt="logo" src={config.logoPath} /> */}
-            <span>两两数字运营平台</span>
+            <span>两两数智运营平台</span>
           </div>
           <Form
             onFinish={handleOk}
@@ -101,9 +101,8 @@ class Login extends PureComponent {
             </FormItem>
             <FormItem
               name="code"
-              rules={[{ required: true,message: '请输入图形码' }]} hasFeedback>
+              rules={[{ required: true,message: '请输入图形码' }]}>
             <div className={styles.yanzhengContainer}>
-
                 <Input
                   placeholder={'图形码'}
                   />

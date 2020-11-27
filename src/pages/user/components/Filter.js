@@ -33,6 +33,10 @@ class Filter extends Component {
         moment(createTime[0]).format('YYYY-MM-DD'),
         moment(createTime[1]).format('YYYY-MM-DD'),
       ]
+      
+      // fields.queryStartDate = moment(createTime[0]).format('YYYY-MM-DD');  
+      // fields.queryEndDate = moment(createTime[0]).format('YYYY-MM-DD');
+      // delete fields.createTime
     }
     return fields
   }
@@ -84,27 +88,13 @@ class Filter extends Component {
           <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
             <Form.Item
               label="运营商名称："
-              name="name">
+              name="orgName">
               <Search
                 placeholder={i18n.t`Search Name`}
                 onSearch={this.handleSubmit}
               />
             </Form.Item>
           </Col>
-          {/* <Col
-            {...ColProps}
-            xl={{ span: 4 }}
-            md={{ span: 8 }}
-            id="addressCascader"
-          >
-            <Form.Item name="address">
-              <Cascader
-                style={{ width: '100%' }}
-                options={city}
-                placeholder={i18n.t`Please pick an address`}
-              />
-            </Form.Item>
-          </Col> */}
           <Col
             {...ColProps}
             xl={{ span: 8 }}

@@ -9,8 +9,6 @@ import api from 'api'
 const { queryUser } = api
 import * as Service from '../../../../services/operatorService'
 
-import { pageDetailDATA,pageDetailLabelDATA } from '../../common'
-
 export default {
   namespace: 'userDetail',
 
@@ -32,8 +30,6 @@ export default {
   effects: {
     *query({ payload }, { call, put }) {
       const { code, message, data } = yield call(Service.detail, payload)
-      // const { success, message, status, ...other } = data
-      // const {success,other} = {success:true,other:pageDetailDATA}
       if (!code) {
         yield put({
           type: 'querySuccess',

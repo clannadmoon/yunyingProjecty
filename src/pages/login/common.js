@@ -19,7 +19,6 @@ export const routeDATA = [
     },
     {
         "id": "2",
-        "breadcrumbParentId": "1",
         "name": "Users",
         "zh": {
             "name": "运营商管理"
@@ -30,13 +29,13 @@ export const routeDATA = [
         "icon": "user",
         "route": "/user"
     },
-     {
+    {
         "id": "21",
         "menuParentId": "-1",
         "breadcrumbParentId": "2",
         "name": "User Detail",
         "zh": {
-            "name": "企业工商信息"
+            "name": "运营商信息"
         },
         "pt-br": {
             "name": "Detalhes do usuário"
@@ -49,7 +48,7 @@ export const routeDATA = [
         "breadcrumbParentId": "2",
         "name": "User Detail",
         "zh": {
-            "name": "运营商新增"
+            "name": "运营商信息"
         },
         "pt-br": {
             "name": "Detalhes do usuário"

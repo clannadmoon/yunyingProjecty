@@ -6,90 +6,132 @@
 const { pathToRegexp } = require("path-to-regexp")
 // import api from 'api'
 
-import * as Service from '../../services/operatorService'
 
+import * as Service from '../../services/operatorService'
+import { sexArr,companyTypeArr, companyStatusArr,industryArr} from '../user/common'
+import moment from 'moment'
+
+function GetQueryString(name) { 
+  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)","i"); 
+  var r = window.location.search.substr(1).match(reg); 
+  if (r!=null) return (r[2]); return null; 
+  }
 
 // const { queryUser } = api
 
-const paramsData = {
-  "enterpriseName": "test1-update",
-  "creditNumber": "testty0001",
-  "registrationNumber": "testgs0001",
-  "businessStatus": "runing",
-  "establishDate": "2020-01-01 00:00:00",
-  "approveDate": "2020-01-01 00:00:00",
-  "registeredCapital": 1000001,
-  "paidCapital": 1000001,
-  "inIndustry": "3951",
-  "comType": "unlimited_company",
-  "businessTerm": "2030-01-01",
-  "registrationAuthority": "北京朝阳",
-  "personnelSize": 100,
-  "insuredPersonnelSize": 100,
-  "comRegion": "北京",
-  "comAddress": "北京朝阳",
-  "userName": "法人test001",
-  "userCardNo": "法人000000000000000001",
-  "userNation": "汉",
-  "userSex": "1",
-  "userAge": "50",
-  "userBirthday": "1980-10-25",
-  "userAddress": "sxyc",
-  "orgCode": "testty0001",
-  "orgName": "test1",
-  "taxpayerNumber": "test000001"
+const ParamsData = {
+        enterpriseName: "",
+        creditNumber: "",
+        registrationNumber: "",
+        businessStatus: companyStatusArr[0].value,
+        businessScope:'',
+        establishDate: moment(),
+        approveDate:  moment(),
+        registeredCapital: 1,
+        paidCapital: 1,
+        inIndustry: industryArr[0].value,
+        comType: companyTypeArr[0].value,
+        businessTerm: moment(),
+        registrationAuthority: "",
+        personnelSize: 10,
+        insuredPersonnelSize: 10,
+        comRegion: "",
+        comAddress: "",
+        userName: "",
+        userCardNo: "",
+        userNation: "",
+        userSex: sexArr[0].value,
+       
+        userBirthday: moment(),
+        userAddress: "",
+        taxpayerNumber: "",
+
+
+        userAge: "10",
+        orgCode: "test",
+        orgName: "test",
 }
+
+
 
 export default {
   namespace: 'addUser',
 
   state: {
+    loading:true,
     data: {},
+    form:{...ParamsData},
+    detailType: 'create' //'create' 'modify'
   },
 
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(({ pathname }) => {
-        // const match = pathToRegexp('/user/:id').exec(pathname)
-        // if (match) {
-        //   dispatch({ type: 'query', payload: { id: match[1] } })
-        // }
+        console.log('==============location.query', pathToRegexp('/userAdd').exec(location.pathname))
       })
     },
   },
 
   effects: {
-    *query({ payload }, { call, put }) {
-      // console.log("=======================:",pageDetailDATA)
-      // // const data = yield call(queryUser, payload)
-      // // const { success, message, status, ...other } = data
-      // const {success,other} = {success:true,other:pageDetailDATA}
-      // if (success) {
-      //   yield put({
-      //     type: 'querySuccess',
-      //     payload: {
-      //       data: other,
-      //     },
-      //   })
-      // } else {
-      //   throw data
-      // }
+    *query({ payload }, { call, put,select }) {
+      const { form } = yield select(state => state.addUser)
+
+      const { code, message, data } = yield call(Service.detail, payload)
+      if (!code) {
+        let params = {
+          ...form,
+          ...data,
+          establishDate: data.establishDate ? moment(data.establishDate) : moment(),
+          approveDate:  data.approveDate ? moment(data.approveDate) : moment(),
+          businessTerm:data.businessTerm ? moment(data.businessTerm) : moment(),
+          userBirthday: data.userBirthday ? moment(data.userBirthday) : moment(),
+        }
+        yield put({
+          type: 'updateState',
+          payload: {
+            form: params,
+            loading:false,
+          },
+        })
+      } else {
+        yield put({
+          type: 'updateState',
+          payload: {
+            loading:false,
+          },
+        })
+        throw data
+      }
     },
     *add({ payload }, { call, put }) {
-      
       //const {success,data} = yield call(Service.add, paramsData)
-      const result = yield call(Service.add, paramsData)
-
-      console.log("=======================:",result)
-    }
+      const data = yield call(Service.add, payload)
+      console.log("=======================data:",data)
+      if (data.success) {
+        yield put(history.back())
+      } else {
+        throw data
+      }  
+    },
+    //清除查询条件
+    *clear({ payload }, { call, put, select }) {
+      yield put({
+        type: 'updateState',
+        payload: {
+          data: {},
+          form:{...ParamsData},
+          detailType: 'create',
+          loading:true,
+        },
+      })
+    },
   },
 
   reducers: {
-    querySuccess(state, { payload }) {
-      const { data } = payload
+    updateState(state, { payload }) {
       return {
         ...state,
-        data,
+        ...payload,
       }
     },
   },
