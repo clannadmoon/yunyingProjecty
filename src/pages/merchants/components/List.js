@@ -11,18 +11,18 @@ const { confirm } = Modal
 class List extends PureComponent {
   handleChange = (record) => {
     const { onDeleteItem, onChangeStatus, onEditItem, } = this.props
-    onEditItem({ operateCode:record.operateCode });
+    onEditItem({ merchantCode:record.merchantCode });
   }
 
   handleMenuClick = (record) => {
     const { onChangeStatus } = this.props
-    onChangeStatus({ operateCode:record.operateCode,enableFlag:record.enableFlag === 0 ? 1 : 0 });
+    onChangeStatus({ merchantCode:record.merchantCode,enableFlag:record.enableFlag === 0 ? 1 : 0 });
   }
 
   //设置有效时间
   handelDate = (record) => {
     const { onChangeDate } = this.props
-    onChangeDate({ operateCode:record.operateCode});
+    onChangeDate({ merchantCode:record.merchantCode});
   }
 
   render() {

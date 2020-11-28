@@ -38,9 +38,9 @@ class UserModal extends PureComponent {
     const { startTime,endTime } = this.state
     
     let params = {
-      operateCode: item.operateCode,
-      startTime: moment(startTime).format('YYYY-MM-DD HH:MM:SS'),
-      endTime: moment(endTime).format('YYYY-MM-DD HH:MM:SS'),
+      ...item,
+      startTime:  `${moment(startTime).format('YYYY-MM-DD')} 00:00:00`,
+      endTime:  `${moment(endTime).format('YYYY-MM-DD')} 00:00:00`,
     }
     onOk(params)
   }

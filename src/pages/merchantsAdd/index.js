@@ -38,14 +38,15 @@ class ModifyInformation extends PureComponent {
   componentDidMount() {
     const { dispatch,location } = this.props
     const query = location.query
-    if (query.operateCode) {
+    
+    if (query.merchantCode) {
       dispatch({
         type: 'merchantsAdd/updateState',
         payload:{detailType:'modify'},
       })
       dispatch({
         type: 'merchantsAdd/query',
-        payload:{companyCode:query.operateCode},
+        payload:{merchantCode:query.merchantCode},
       })   
     } else {
       dispatch({
@@ -82,7 +83,7 @@ class ModifyInformation extends PureComponent {
    }
 
    if (detailType === 'modify') {
-     params.operateCode = form.operateCode;
+     params.merchantCode = form.merchantCode;
     } 
     dispatch({ type: 'merchantsAdd/add', payload: params })
  }
