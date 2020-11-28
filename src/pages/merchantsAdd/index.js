@@ -33,40 +33,6 @@ class ModifyInformation extends PureComponent {
   
   constructor(props) {
     super(props)
-    this.state = {
-      form: {    
-        enterpriseName: "",
-        creditNumber: "",
-        registrationNumber: "",
-        businessStatus: companyStatusArr[0].value,
-        businessScope:'',
-        establishDate: moment(),
-        approveDate:  moment(),
-        registeredCapital: 1,
-        paidCapital: 1,
-        inIndustry: industryArr[0].value,
-        comType: companyTypeArr[0].value,
-        businessTerm: moment(),
-        registrationAuthority: "",
-        personnelSize: 10,
-        insuredPersonnelSize: 10,
-        comRegion: "",
-        comAddress: "",
-        userName: "",
-        userCardNo: "",
-        userNation: "",
-        userSex: sexArr[0].value,
-       
-        userBirthday: moment(),
-        userAddress: "",
-        taxpayerNumber: "",
-
-
-        userAge: "10",
-        orgCode: "test",
-        orgName: "test",
-      }  
-    }
   }
   
   componentDidMount() {
@@ -107,12 +73,12 @@ class ModifyInformation extends PureComponent {
      establishDate: values.establishDate ? moment(values.establishDate).format('YYYY-MM-DD HH:MM:SS') : '',
      approveDate: values.approveDate ? moment(values.approveDate).format('YYYY-MM-DD HH:MM:SS') : '',
      businessTerm: values.businessTerm ? moment(values.businessTerm).format('YYYY-MM-DD HH:MM:SS') : '',
-     userBirthday: values.userBirthday ? moment(values.userBirthday).format('YYYY-MM-DD HH:MM:SS') : '',
+     legalBirthday: values.legalBirthday ? moment(values.legalBirthday).format('YYYY-MM-DD HH:MM:SS') : '',
 
 
-     userAge: "10",
-     orgCode: "test",
-     orgName: "test",
+    //  userAge: "10",
+    //  orgCode: "test",
+    //  orgName: "test",
    }
 
    if (detailType === 'modify') {
@@ -168,7 +134,7 @@ class ModifyInformation extends PureComponent {
               </Col>
               <Col span={8}>
                 
-                <FormItem name='taxpayerNumber' rules={[{ required: true }]}
+                <FormItem name='taxpayerNumber' rules={[{ required: false }]}
                 label={'纳税人识别号'} >
                 <Input />
               </FormItem>
@@ -177,7 +143,7 @@ class ModifyInformation extends PureComponent {
             </Row>
             <Row>
               <Col span={8}>
-              <FormItem name='businessStatus' rules={[{ required: true }]}
+              <FormItem name='businessStatus' rules={[{ required: false }]}
               label={'登记状态'} >
               <Select defaultValue={companyStatusArr[0].value } >
               {
@@ -192,9 +158,9 @@ class ModifyInformation extends PureComponent {
            
               </Col>
               <Col span={8}>
-              <FormItem name='comType' rules={[{ required: true }]}
+              <FormItem name='comType' rules={[{ required: false }]}
               label={'企业类型'} >
-                  <Select defaultValue={companyTypeArr[0].value } >
+                  <Select>
                     {
                       companyTypeArr.map((item,index) => {
                         return (
@@ -208,7 +174,7 @@ class ModifyInformation extends PureComponent {
               <Col span={8}>
               <FormItem name='inIndustry' rules={[{ required: false }]}
               label={'所属行业'} >
-              <Select defaultValue={industryArr[0].value } >
+              <Select >
               {
                 industryArr.map((item,index) => {
                   return (
@@ -263,7 +229,7 @@ class ModifyInformation extends PureComponent {
           </FormItem>
             </Col>
             <Col span={8}>
-            <FormItem name='registeredCapital' rules={[{ required: false }]}
+            <FormItem name='registeredCapital' rules={[{ required: true }]}
               label={'注册资本'} >
                   <InputNumber min={ 1}/>
             </FormItem>
@@ -325,21 +291,21 @@ class ModifyInformation extends PureComponent {
 
             <Row>
             <Col span={8}>
-            <FormItem name='userName' rules={[{ required: true }]}
+            <FormItem name='legalUserName' rules={[{ required: true }]}
             label={'法定代表人'} >
             <Input />
           </FormItem>
             </Col>
 
               <Col span={8}>
-              <FormItem name='userCardNo' rules={[{ required: true }]}
+              <FormItem name='legalCardNo' rules={[{ required: true }]}
             label={'法人证件号'} >
             <Input />
           </FormItem>
            
             </Col>
             <Col span={8}>
-            <FormItem name='userCardType' rules={[{ required: false }]}
+            <FormItem name='legalCardType' rules={[{ required: false }]}
             label={'法人证件类型'} >
             <Input />
           </FormItem>
@@ -349,13 +315,13 @@ class ModifyInformation extends PureComponent {
             
             <Row>
             <Col span={8}>
-            <FormItem name='userNation' rules={[{ required: false }]}
+            <FormItem name='legalNation' rules={[{ required: false }]}
             label={'法人民族'} >
             <Input />
           </FormItem>
               </Col>
               <Col span={8}>
-              <FormItem name='userSex' rules={[{ required: false }]}
+              <FormItem name='legalSex' rules={[{ required: false }]}
             label={'法人性别'} >
              <Select >
                     {
@@ -369,7 +335,7 @@ class ModifyInformation extends PureComponent {
           </FormItem>
               </Col>
               <Col span={8}>
-              <FormItem name='userBirthday' rules={[{ required: false }]}
+              <FormItem name='legalBirthday' rules={[{ required: false }]}
             label={'法人生日'} >
              <DatePicker  />
           </FormItem>

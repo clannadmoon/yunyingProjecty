@@ -35,7 +35,7 @@ class List extends PureComponent {
         dataIndex: 'merchantName',
         key: 'merchantName',
         fixed: 'left',
-        render: (text, record) => <Link to={`merchants/${record.operateCode}`}>{text}</Link>,
+        render: (text, record) => <Link to={`merchants/${record.merchantCode}`}>{text}</Link>,
       },
       {
         width:100,

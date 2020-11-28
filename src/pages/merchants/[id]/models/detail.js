@@ -21,7 +21,7 @@ export default {
       history.listen(({ pathname }) => {
         const match = pathToRegexp('/merchants/:id').exec(pathname)
         if (match) {
-          dispatch({ type: 'merchantsDetail/query', payload: { companyCode: match[1] } })
+          dispatch({ type: 'merchantsDetail/query', payload: { merchantCode: match[1] } })
         }
       })
     },
@@ -38,7 +38,8 @@ export default {
           },
         })
       } else {
-        throw data
+        console.error(data)
+        //throw data
       }
     },
   },

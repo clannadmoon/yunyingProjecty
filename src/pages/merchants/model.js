@@ -93,7 +93,8 @@ export default modelExtend(pageModel, {
           },
         })
       } else {
-        throw data
+        console.error(data)
+        //throw data
       }
     },
 
@@ -102,7 +103,8 @@ export default modelExtend(pageModel, {
       if (data.success) {
         yield put({ type: 'updateState', payload: { selectedRowKeys: [] } })
       } else {
-        throw data
+        console.error(data)
+        //throw data
       }
     },
 
@@ -111,7 +113,8 @@ export default modelExtend(pageModel, {
       if (data.success) {
         yield put({ type: 'hideModal' })
       } else {
-        throw data
+        console.error(data)
+        //throw data
       }
     },
 
@@ -122,7 +125,8 @@ export default modelExtend(pageModel, {
       if (data.success) {
         yield put({ type: 'hideModal' })
       } else {
-        throw data
+        console.error(data)
+        //throw data
       }
     },
 
@@ -137,7 +141,8 @@ export default modelExtend(pageModel, {
           },
         })
       } else {
-        throw data
+        console.error(data)
+        //throw data
       }
     },
 
@@ -148,7 +153,8 @@ export default modelExtend(pageModel, {
       if (data.success) {
         yield put({ type: 'hideModal' })
       } else {
-        throw data
+        console.error(data)
+        //throw data
       }
     },
   },

@@ -33,14 +33,14 @@ industryArr.forEach(({label,value}) => {
 @connect(({ merchantsDetail }) => ({ merchantsDetail }))
 class Detail extends PureComponent {
   render() {
-    const { userDetail } = this.props
-    const { data } = userDetail
+    const { merchantsDetail } = this.props
+    const { data } = merchantsDetail
     
     return (
       <Page inner>
         <div className={styles.content}>
         <Descriptions title="企业工商信息">
-            <Descriptions.Item label="运营商企业名称">{ data.enterpriseName ? data.enterpriseName :'-'}</Descriptions.Item>
+            <Descriptions.Item label="运营商企业名称">{ data.merchantName ? data.merchantName :'-'}</Descriptions.Item>
             <Descriptions.Item label="统一社会信用代码">{data.creditNumber ? data.creditNumber : '-'}</Descriptions.Item>
             <Descriptions.Item label="纳税人识别号">{ data.taxpayerNumber ? data.taxpayerNumber :'-'}</Descriptions.Item>
             <Descriptions.Item label="工商注册号">{ data.registrationNumber ? data.registrationNumber :'-'}</Descriptions.Item>
@@ -66,12 +66,12 @@ class Detail extends PureComponent {
 
           <div className={ styles.descriptionsContent}>
           <Descriptions title="企业联系人">
-            <Descriptions.Item label="法定代表人">{ data.userName ? data.userName :'-'}</Descriptions.Item>
-            <Descriptions.Item label="法人证件号">{ data.userCardNo ? data.userCardNo :'-'}</Descriptions.Item>
-            <Descriptions.Item label="法人证件类型">{ data.userCardType ? data.userCardType :'-'}</Descriptions.Item>
-            <Descriptions.Item label="法人民族">{ data.userNation ? data.userNation :'-'}</Descriptions.Item>
-            <Descriptions.Item label="法人性别">{ data.userSex ? SexObj[data.userSex] :'-'}</Descriptions.Item>
-              <Descriptions.Item label="法人生日">{data.userBirthday ? data.userBirthday : '-'}</Descriptions.Item>
+            <Descriptions.Item label="法定代表人">{ data.legalUserName ? data.legalUserName :'-'}</Descriptions.Item>
+            <Descriptions.Item label="法人证件号">{ data.legalCardNo ? data.legalCardNo :'-'}</Descriptions.Item>
+            <Descriptions.Item label="法人证件类型">{ data.legalCardType ? data.legalCardType :'-'}</Descriptions.Item>
+            <Descriptions.Item label="法人民族">{ data.legalNation ? data.legalNation :'-'}</Descriptions.Item>
+            <Descriptions.Item label="法人性别">{ data.legalSex ? SexObj[data.legalSex] :'-'}</Descriptions.Item>
+              <Descriptions.Item label="法人生日">{data.legalBirthday ? data.legalBirthday : '-'}</Descriptions.Item>
               <Descriptions.Item label="法人地址">{ data.userAddress ? data.userAddress :'-'}</Descriptions.Item>
           
           
