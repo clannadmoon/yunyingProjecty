@@ -77,7 +77,7 @@ class List extends PureComponent {
               }}>设置</span>
               <span onClick={() => {
                 this.handleMenuClick(record)
-              }}>{record.enableFlag ? '启用' : '禁用'}</span>
+              }}>{!record.enableFlag ? '启用' : '禁用'}</span>
             </div>
           )
         },
