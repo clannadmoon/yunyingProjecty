@@ -8,23 +8,23 @@ export const routeDATA = [
     {
         "id": "1",
         "icon": "dashboard",
-        "name": "Dashboard",
+        "name": "仪表盘",
         "zh": {
             "name": "仪表盘"
         },
         "pt-br": {
-            "name": "Dashboard"
+            "name": "仪表盘"
         },
         "route": "/dashboard"
     },
     {
         "id": "2",
-        "name": "Users",
+        "name": "运营商管理",
         "zh": {
             "name": "运营商管理"
         },
         "pt-br": {
-            "name": "Usuário"
+            "name": "运营商管理"
         },
         "icon": "user",
         "route": "/user"
@@ -33,27 +33,65 @@ export const routeDATA = [
         "id": "21",
         "menuParentId": "-1",
         "breadcrumbParentId": "2",
-        "name": "User Detail",
+        "name": "运营商信息",
         "zh": {
             "name": "运营商信息"
         },
         "pt-br": {
-            "name": "Detalhes do usuário"
+            "name": "运营商信息"
         },
         "route": "/user/:id"
     },
     {
-        "id": "7",
+        "id": "22",
         "menuParentId": "-1",
         "breadcrumbParentId": "2",
-        "name": "User Detail",
+        "name": "运营商信息",
         "zh": {
             "name": "运营商信息"
         },
         "pt-br": {
-            "name": "Detalhes do usuário"
+            "name": "运营商信息"
         },
         "route": "/userAdd"
+    },
+    {
+        "id": "3",
+        "name": "商户管理",
+        "zh": {
+            "name": "商户管理"
+        },
+        "pt-br": {
+            "name": "商户信息"
+        },
+        "icon": "shop",
+        "route": "/merchants"
+    },
+    {
+        "id": "31",
+        "menuParentId": "-1",
+        "breadcrumbParentId": "3",
+        "name": "商户信息",
+        "zh": {
+            "name": "商户信息"
+        },
+        "pt-br": {
+            "name": "商户信息"
+        },
+        "route": "/merchants/:id"
+    },
+    {
+        "id": "32",
+        "menuParentId": "-1",
+        "breadcrumbParentId": "3",
+        "name": "商户信息",
+        "zh": {
+            "name": "商户信息"
+        },
+        "pt-br": {
+            "name": "商户信息"
+        },
+        "route": "/merchantsAdd"
     },
 ];
  
@@ -66,7 +104,7 @@ export const userDATA = {
         "username": "guest",
         "permissions":
         {
-            "visit": ["1", "2", "21", "7", "5", "51", "52", "53"], "role": "guest"
+            "visit": ["1", "2", "21", "22", "3","31","32","5", "51", "52", "53"], "role": "guest"
         },
         "avatar": "//image.zuiidea.com/photo-1489779162738-f81aed9b0a25.jpeg?imageView2/1/w/200/h/200/format/webp/q/75|imageslim"
     }
