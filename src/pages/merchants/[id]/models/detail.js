@@ -7,7 +7,7 @@ const { pathToRegexp } = require("path-to-regexp")
 import api from 'api'
 
 const { queryUser } = api
-import * as Service from '../../../../services/operatorService'
+import * as Service from '../../../../services/shopService'
 
 export default {
   namespace: 'merchantsDetail',

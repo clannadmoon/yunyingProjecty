@@ -5,10 +5,9 @@
  */
 const { pathToRegexp } = require("path-to-regexp")
 
-import * as Service from '../../services/operatorService'
+import * as Service from '../../services/shopService'
 import { sexArr,companyTypeArr, companyStatusArr,industryArr} from '../user/common'
 import moment from 'moment'
-
 
 const ParamsData = {
         enterpriseName: "",
@@ -42,8 +41,6 @@ const ParamsData = {
         orgCode: "test",
         orgName: "test",
 }
-
-
 
 export default {
   namespace: 'merchantsAdd',
@@ -99,7 +96,7 @@ export default {
       if (data.success) {
         yield put(history.back())
       } else {
-        throw data
+        //throw data
       }  
     },
     //清除查询条件

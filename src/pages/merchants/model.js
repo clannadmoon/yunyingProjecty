@@ -17,7 +17,7 @@ const {
   removeUserList,
 } = api
 
-import * as Service from '../../services/operatorService'
+import * as Service from '../../services/shopService'
 
 
 export default modelExtend(pageModel, {

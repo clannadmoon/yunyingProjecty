@@ -9,12 +9,12 @@ import { stringify } from 'qs';
 
 //列表
 export async function list(params) {
-    return request(`/api/operate/operateorgs/page?${stringify(params)}`);
+    return request(`/api/merchants/operatemerchants/list?${stringify(params)}`);
 }
 
 //新增和修改
 export async function add(params) {
-  return request('/api/operate/operateorgs/submitCompany', {
+  return request('/api/merchants/operatemerchants/saveOrUpdateCompany', {
     method: 'POST',
     body: params,
   });
@@ -22,12 +22,12 @@ export async function add(params) {
 
 //详情
 export async function detail(params) {
-  return request(`/api/operate/operateorgs/companyDetail?${stringify(params)}`);
+  return request(`/api/merchants/operatemerchants/companyDetail?${stringify(params)}`);
 }
 
 //启用和禁用
 export async function changeStatus(params) {
-  return request('/api/operate/operateorgs/updateStatus', {
+  return request('/api/merchants/operatemerchants/updateStatus', {
     method: 'POST',
     body: params,
   });
@@ -35,7 +35,7 @@ export async function changeStatus(params) {
 
 //修改运营时间
 export async function changeOperateDate(params) {
-  return request('/api/operate/operateorgs/setPeriod', {
+  return request('/api/merchants/operatemerchants/updateAvailablePeriod', {
     method: 'POST',
     body: params,
   });

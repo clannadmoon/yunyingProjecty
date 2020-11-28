@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import { FilterItem } from 'components'
 
-import { Trans } from '@lingui/react'
 import { Button, Row, Col, DatePicker, Form, Input, Cascader } from 'antd'
 import city from 'utils/city'
 
@@ -67,7 +66,7 @@ class Filter extends Component {
   }
 
   render() {
-    const { onAdd, filter, i18n } = this.props
+    const { onAdd, filter } = this.props
     const { name, address } = filter
 
     let initialCreateTime = []
@@ -83,10 +82,10 @@ class Filter extends Component {
         <Row gutter={24}>
           <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
             <Form.Item
-              label="运营商名称："
+              label="商户名称"
               name="orgName">
               <Search
-                placeholder={i18n.t`Search Name`}
+                placeholder={`请输入商户名称`}
                 onSearch={this.handleSubmit}
               />
             </Form.Item>
@@ -98,8 +97,8 @@ class Filter extends Component {
             sm={{ span: 12 }}
             id="createTimeRangePicker"
           >
-            <FilterItem label={i18n.t`CreateTime`}>
-              <Form.Item name="createTime">
+            <FilterItem label={`创建时间`}>
+              <Form.Item name="创建时间">
                 <RangePicker
                   style={{ width: '100%' }}
                 />
@@ -119,14 +118,14 @@ class Filter extends Component {
                   className="margin-right"
                   onClick={this.handleSubmit}
                 >
-                  <Trans>Search</Trans>
+                  <div>搜索</div>
                 </Button>
                 <Button onClick={this.handleReset}>
-                  <Trans>Reset</Trans>
+                  <div>重置</div>
                 </Button>
               </div>
               <Button type="ghost" onClick={onAdd}>
-                <Trans>Create</Trans>
+                <div>创建</div>
               </Button>
             </Row>
           </Col>

@@ -2,22 +2,16 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { Table, Modal, Avatar } from 'antd'
 import { DropOption } from 'components'
-import { Trans, withI18n } from '@lingui/react'
 import { Link,connect } from 'umi'
 import styles from './List.less'
 import { history } from 'umi'
 
 const { confirm } = Modal
 
-@withI18n()
 class List extends PureComponent {
   handleChange = (record) => {
-    const { onDeleteItem, onChangeStatus, onEditItem, i18n } = this.props
+    const { onDeleteItem, onChangeStatus, onEditItem, } = this.props
     onEditItem({ operateCode:record.operateCode });
-    // history.push({
-    //   pathname: `/userAdd?operateCode=${record.operateCode}`,
-    //   //query: { operateCode:record.operateCode },
-    // })
   }
 
   handleMenuClick = (record) => {
@@ -32,43 +26,43 @@ class List extends PureComponent {
   }
 
   render() {
-    const { onDeleteItem, onEditItem, i18n, ...tableProps } = this.props
+    const { onDeleteItem, onEditItem, ...tableProps } = this.props
 
     const columns = [
       {
         width:200,
-        title: <Trans>运营商名称</Trans>,
-        dataIndex: 'orgName',
-        key: 'orgName',
+        title: <div>商户名称</div>,
+        dataIndex: 'merchantName',
+        key: 'merchantName',
         fixed: 'left',
-        render: (text, record) => <Link to={`user/${record.operateCode}`}>{text}</Link>,
+        render: (text, record) => <Link to={`merchants/${record.operateCode}`}>{text}</Link>,
       },
       {
         width:100,
-        title: <Trans>组织类型</Trans>,
+        title: <div>组织类型</div>,
         dataIndex: 'orgTypeName',
         key: 'orgTypeName',
         render: text => <span>{text ? text :'-'}</span>,
       },
       {
-        title: <Trans>添加时间</Trans>,
+        title: <div>添加时间</div>,
         dataIndex: 'createTime',
         key: 'createTime',
       },
       {
         width:80,
-        title: <Trans>状态</Trans>,
+        title: <div>状态</div>,
         dataIndex: 'enableFlag',
         key: 'enableFlag',
         render: text => <span>{text ? '已禁用' : '启用中'}</span>,
       },
       {
-        title: <Trans>更新时间</Trans>,
+        title: <div>更新时间</div>,
         dataIndex: 'updateTime',
         key: 'updateTime',
       },
       {
-        title: <Trans>操作</Trans>,
+        title: <div>操作</div>,
         key: 'operation',
         fixed: 'right',
         width: 130,
@@ -95,7 +89,7 @@ class List extends PureComponent {
         {...tableProps}
         pagination={{
           ...tableProps.pagination,
-          showTotal: total => i18n.t`Total ${total} Items`,
+          showTotal: total => `总计：${total} 条`,
         }}
         className={styles.table}
         bordered

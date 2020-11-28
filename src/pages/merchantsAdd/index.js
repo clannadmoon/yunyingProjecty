@@ -142,7 +142,7 @@ class ModifyInformation extends PureComponent {
     return (
       <Page inner>
         <div className={styles.content}>
-          <Title level={4}>{detailType === 'create' ? '新增运营商信息' : '修改运营商信息'}</Title>
+          <Title level={4}>{detailType === 'create' ? '新增商户信息' : '修改商户信息'}</Title>
        
           <Form
             {...formItemLayout}
@@ -155,7 +155,7 @@ class ModifyInformation extends PureComponent {
             <Divider orientation="left">工商信息</Divider>
             <Row>
               <Col span={8}>
-              <FormItem name='enterpriseName' rules={[{ required: true }]}
+              <FormItem name='merchantName' rules={[{ required: true }]}
                 label={'企业名称'} >
                   <Input />
               </FormItem>

@@ -3,14 +3,13 @@ import PropTypes from 'prop-types'
 import { history } from 'umi'
 import { connect } from 'umi'
 import { Row, Col, Button, Popconfirm } from 'antd'
-import { withI18n } from '@lingui/react'
 import { Page } from 'components'
 import { stringify } from 'qs'
 import List from './components/List'
 import Filter from './components/Filter'
 import Modal from './components/Modal'
 import moment from 'moment'
-@withI18n()
+
 @connect(({ merchants, loading }) => ({ merchants, loading }))
 class ListContent extends PureComponent {
   handleRefresh = newQuery => {
@@ -70,26 +69,18 @@ class ListContent extends PureComponent {
       },
       onEditItem(item) {
         history.push({
-          pathname: `/userAdd`,
+          pathname: '/merchantsAdd',
           query: item,
         })
-        // dispatch({
-        //   type: 'user/showModal',
-        //   payload: {
-        //     modalType: 'update',
-        //     currentItem: item,
-        //   },
-        // })
       },
     }
   }
 
   get filterProps() {
-    const { location, dispatch, i18n } = this.props
+    const { location, dispatch } = this.props
     const { query } = location
 
     return {
-      i18n,
       filter: {
         ...query,
       },
@@ -99,13 +90,13 @@ class ListContent extends PureComponent {
         })
       },
       onAdd() {
-        history.push('/userAdd')
+        history.push('/merchantsAdd')
       },
     }
   }
 
   get modalProps() {
-    const { dispatch, merchants, loading, i18n } = this.props
+    const { dispatch, merchants, loading, } = this.props
     const { currentItem, modalVisible } = merchants
 
     return { 
