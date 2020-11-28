@@ -60,7 +60,7 @@ class List extends PureComponent {
         title: <Trans>状态</Trans>,
         dataIndex: 'enableFlag',
         key: 'enableFlag',
-        render: text => <span>{text ? '已禁用' : '启用中'}</span>,
+        render: text => <span>{!text ? '已禁用' : '启用中'}</span>,
       },
       {
         title: <Trans>更新时间</Trans>,
