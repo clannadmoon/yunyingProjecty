@@ -21,7 +21,7 @@ import * as Service from '../../services/operatorService'
 
 
 export default modelExtend(pageModel, {
-  namespace: 'user',
+  namespace: 'operator',
 
   state: {
     currentItem: {},
@@ -33,7 +33,7 @@ export default modelExtend(pageModel, {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(location => {
-        if (pathToRegexp('/user').exec(location.pathname)) {
+        if (pathToRegexp('/operator').exec(location.pathname)) {
           console.log("========================================location.query:", location.query)
           let payload = {}
           if (Object.keys(location.query).length > 0) {
@@ -84,7 +84,7 @@ export default modelExtend(pageModel, {
 
     *delete({ payload }, { call, put, select }) {
       const data = yield call(removeUser, { id: payload })
-      const { selectedRowKeys } = yield select(_ => _.user)
+      const { selectedRowKeys } = yield select(_ => _.operator)
       if (data.success) {
         yield put({
           type: 'updateState',
@@ -116,7 +116,7 @@ export default modelExtend(pageModel, {
     },
 
     *update({ payload }, { select, call, put }) {
-      const id = yield select(({ user }) => user.currentItem.id)
+      const id = yield select(({ operator }) => operator.currentItem.id)
       const newUser = { ...payload, id }
       const data = yield call(updateUser, newUser)
       if (data.success) {

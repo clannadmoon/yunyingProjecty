@@ -30,11 +30,11 @@ industryArr.forEach(({label,value}) => {
   IndustryObj[value]=label
 })
 
-@connect(({ userDetail }) => ({ userDetail }))
-class UserDetail extends PureComponent {
+@connect(({ operatorDetail }) => ({ operatorDetail }))
+class OperatorDetail extends PureComponent {
   render() {
-    const { userDetail } = this.props
-    const { data } = userDetail
+    const { operatorDetail } = this.props
+    const { data } = operatorDetail
     
     return (
       <Page inner>
@@ -83,8 +83,8 @@ class UserDetail extends PureComponent {
   }
 }
 
-UserDetail.propTypes = {
-  userDetail: PropTypes.object,
+OperatorDetail.propTypes = {
+  operatorDetail: PropTypes.object,
 }
 
-export default UserDetail
+export default OperatorDetail

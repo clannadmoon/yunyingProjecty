@@ -41,7 +41,7 @@ class List extends PureComponent {
         dataIndex: 'orgName',
         key: 'orgName',
         fixed: 'left',
-        render: (text, record) => <Link to={`user/${record.operateCode}`}>{text}</Link>,
+        render: (text, record) => <Link to={`operator/${record.operateCode}`}>{text}</Link>,
       },
       {
         width:100,

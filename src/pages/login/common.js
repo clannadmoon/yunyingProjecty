@@ -3,7 +3,6 @@
  * @Author: zhoupeng
  * @Date: 2020-11-20 10:59:18
  */
-
 export const routeDATA = [
     {
         "id": "1",
@@ -27,7 +26,7 @@ export const routeDATA = [
             "name": "运营商管理"
         },
         "icon": "user",
-        "route": "/user"
+        "route": "/operator"
     },
     {
         "id": "21",
@@ -40,7 +39,7 @@ export const routeDATA = [
         "pt-br": {
             "name": "运营商信息"
         },
-        "route": "/user/:id"
+        "route": "/operator/:id"
     },
     {
         "id": "22",
@@ -53,7 +52,7 @@ export const routeDATA = [
         "pt-br": {
             "name": "运营商信息"
         },
-        "route": "/userAdd"
+        "route": "/operatorAdd"
     },
     {
         "id": "3",

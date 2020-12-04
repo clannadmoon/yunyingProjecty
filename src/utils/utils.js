@@ -120,6 +120,7 @@ export function getRoutes(path, routerData) {
   const renderArr = getRenderArr(routes);
   // Conversion and stitching parameters
   const renderRoutes = renderArr.map(item => {
+    // const exact = !routes.some(route => route !== item && getRelation(route, item) === 1);
     const exact = !routes.some(route => route !== item && getRelation(route, item) === 1);
     return {
       exact,

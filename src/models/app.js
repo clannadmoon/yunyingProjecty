@@ -17,6 +17,47 @@ const { queryRouteList, logoutUser, queryUserInfo } = api
 
 import {routeDATA,loginDATA,userDATA} from '../pages/login/common'
 
+const handleRoute = (routeArr)=> {
+  let routeArrOut = [
+    {
+      "id": "1",
+      "icon": "dashboard",
+      "name": "仪表盘",
+      "zh": {
+          "name": "仪表盘"
+      },
+      "pt-br": {
+          "name": "仪表盘"
+      },
+      "route": "/dashboard"
+  }
+  ]
+  routeArr.forEach((item1) => {
+    let obj = {
+      id: item1.id,
+      icon: item1.source, 
+      name: item1.name,
+      route: item1.path,
+      menuParentId: "-1",
+    };
+    routeArrOut.push(obj);
+    let children = item1.children
+    if (children) {
+      children.forEach((item2) => {
+        let obj = {
+          id: item2.id,
+          icon: item2.source, 
+          name: item2.name,
+          route: item2.path,
+          menuParentId: item1.id,
+          breadcrumbParentId: item1.id,
+        };
+        routeArrOut.push(obj);
+      })
+    }
+  })
+  return routeArrOut;
+}
 
 const goDashboard = () => {
   if (pathToRegexp(['/', '/login']).exec(window.location.pathname)) {
@@ -94,13 +135,15 @@ export default {
       // }
       const { locationPathname } = yield select(_ => _.app)
 
-      const {code ,success,msg,data } = yield call(dynamicRoutes);
-      console.log('>>>>>>>>>>>:',data)
+      const {success,msg,data } = yield call(dynamicRoutes);
+      
 
       if (success) {
         const { success, user } = userDATA
         
-        const list  = routeDATA
+         const list = routeDATA
+        //const list = handleRoute(data)
+        console.log('>>>>>>>>>>>list:',list)
         const { permissions } = user
         let routeList = list
         if (true) {

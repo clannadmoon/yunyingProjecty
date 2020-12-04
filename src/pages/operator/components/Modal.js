@@ -24,7 +24,7 @@ const formItemLayout = {
   },
 }
 
-class UserModal extends PureComponent {
+class OperatorModal extends PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -98,10 +98,10 @@ class UserModal extends PureComponent {
   }
 }
 
-UserModal.propTypes = {
+OperatorModal.propTypes = {
   type: PropTypes.string,
   item: PropTypes.object,
   onOk: PropTypes.func,
 }
 
-export default UserModal
+export default OperatorModal

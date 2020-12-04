@@ -11,7 +11,7 @@ import styles from './index.less'
 
 import { Form, Input,Row,Col,Divider,Typography, InputNumber,Descriptions, Radio, Modal, Cascader,Button,Select,DatePicker, Spin } from 'antd'
 
-import { sexArr,companyTypeArr, companyStatusArr,industryArr} from '../user/common'
+import { sexArr,companyTypeArr, companyStatusArr,industryArr} from '../operator/common'
 
 import moment from 'moment'
 

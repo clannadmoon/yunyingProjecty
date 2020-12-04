@@ -10,7 +10,7 @@ const { queryUser } = api
 import * as Service from '../../../../services/operatorService'
 
 export default {
-  namespace: 'userDetail',
+  namespace: 'operatorDetail',
 
   state: {
     data: {},
@@ -19,9 +19,9 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(({ pathname }) => {
-        const match = pathToRegexp('/user/:id').exec(pathname)
+        const match = pathToRegexp('/operator/:id').exec(pathname)
         if (match) {
-          dispatch({ type: 'userDetail/query', payload: { companyCode: match[1] } })
+          dispatch({ type: 'operatorDetail/query', payload: { companyCode: match[1] } })
         }
       })
     },

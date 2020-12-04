@@ -6,7 +6,7 @@
 const { pathToRegexp } = require("path-to-regexp")
 
 import * as Service from '../../services/shopService'
-import { sexArr,companyTypeArr, companyStatusArr,industryArr} from '../user/common'
+import { sexArr,companyTypeArr, companyStatusArr,industryArr} from '../operator/common'
 import moment from 'moment'
 
 const ParamsData = {

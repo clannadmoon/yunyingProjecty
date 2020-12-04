@@ -11,8 +11,8 @@ import Filter from './components/Filter'
 import Modal from './components/Modal'
 import moment from 'moment'
 @withI18n()
-@connect(({ user, loading }) => ({ user, loading }))
-class User extends PureComponent {
+@connect(({ operator, loading }) => ({ operator, loading }))
+class Operator extends PureComponent {
   handleRefresh = newQuery => {
     const { location } = this.props
     const { query, pathname } = location
@@ -34,12 +34,12 @@ class User extends PureComponent {
   }
 
   get listProps() {
-    const { dispatch, user, loading } = this.props
-    const { list, pagination } = user
+    const { dispatch, operator, loading } = this.props
+    const { list, pagination } = operator
 
     return {
       dataSource: list,
-      loading: loading.effects['user/query'],
+      loading: loading.effects['operator/query'],
       pagination,
       onChange: page => {
         this.handleRefresh({
@@ -49,7 +49,7 @@ class User extends PureComponent {
       },
       onChangeStatus: payload => {
         dispatch({
-          type: 'user/changeStatus',
+          type: 'operator/changeStatus',
           payload,
         }).then(() => {
           this.handleRefresh({
@@ -62,7 +62,7 @@ class User extends PureComponent {
       },
       onChangeDate: item => {
         dispatch({
-          type: 'user/showModal',
+          type: 'operator/showModal',
           payload: {
             currentItem: item,
           },
@@ -70,7 +70,7 @@ class User extends PureComponent {
       },
       onEditItem(item) {
         history.push({
-          pathname: `/userAdd`,
+          pathname: `/operatorAdd`,
           query: item,
         })
         // dispatch({
@@ -99,14 +99,14 @@ class User extends PureComponent {
         })
       },
       onAdd() {
-        history.push('/userAdd')
+        history.push('/operatorAdd')
       },
     }
   }
 
   get modalProps() {
-    const { dispatch, user, loading, i18n } = this.props
-    const { currentItem, modalVisible } = user
+    const { dispatch, operator, loading, i18n } = this.props
+    const { currentItem, modalVisible } = operator
 
     return { 
       item: currentItem,
@@ -119,7 +119,7 @@ class User extends PureComponent {
       onOk: data => {
         console.log('data',data)
         dispatch({
-          type: 'user/changeOperateDate',
+          type: 'operator/changeOperateDate',
           payload: data,
         }).then(() => {
           this.handleRefresh()
@@ -127,14 +127,14 @@ class User extends PureComponent {
       },
       onCancel() {
         dispatch({
-          type: 'user/hideModal',
+          type: 'operator/hideModal',
         })
       },
     }
   }
 
   render() {
-    const { user } = this.props
+    const { operator } = this.props
     return (
       <Page inner>
         <Filter {...this.filterProps} />
@@ -145,11 +145,11 @@ class User extends PureComponent {
   }
 }
 
-User.propTypes = {
-  user: PropTypes.object,
+Operator.propTypes = {
+  operator: PropTypes.object,
   location: PropTypes.object,
   dispatch: PropTypes.func,
   loading: PropTypes.object,
 }
 
-export default User
+export default Operator
