@@ -178,7 +178,7 @@ class ModifyInformation extends PureComponent {
               <Col span={8}>
               <FormItem name='inIndustry' rules={[{ required: false }]}
               label={'所属行业'} >
-              <Select >
+              {/* <Select >
               {
                 industryArr.map((item,index) => {
                   return (
@@ -186,7 +186,8 @@ class ModifyInformation extends PureComponent {
                   )
                 })
               }
-          </Select>
+          </Select> */}
+                  <Input />
                     
                 </FormItem>
                 </Col>
