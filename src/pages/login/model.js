@@ -53,7 +53,7 @@ export default {
 
       console.log('=================response:',response)
       
-      
+      //if (false) {
       if (response.success) {
         const { success, data } = response;
         yield put({
@@ -69,7 +69,7 @@ export default {
         yield put({
           type: 'saveMenuData',
           payload: {
-            routes: responseRoutes.data,
+            routes: routeDATA,
             buttons: responseButtons.data,
           },
         });
@@ -159,7 +159,8 @@ export default {
     },
     saveMenuData(state, { payload }) {
       const { routes, buttons } = payload;
-      setRoutes(formatRoutes(routes));
+      setRoutes(routes);
+      //setRoutes(formatRoutes(routes));
       setButtons(formatButtons(buttons));
       return {
         ...state,
