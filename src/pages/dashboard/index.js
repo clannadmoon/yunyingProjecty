@@ -60,12 +60,12 @@ class Dashboard extends PureComponent {
     ))
 
     return (
-      <Page
+      <Page inner
         // loading={loading.models.dashboard && sales.length === 0}
         className={styles.dashboard}
       >
         <Row gutter={24}>
-         表盘
+         以后用于展示综合运营情况
         </Row>
       </Page>
     )

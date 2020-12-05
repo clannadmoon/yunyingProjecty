@@ -55,7 +55,7 @@ const ParamsData = {
 
 
 export default {
-  namespace: 'addUser',
+  namespace: 'operatorAdd',
 
   state: {
     loading:true,
@@ -74,7 +74,7 @@ export default {
 
   effects: {
     *query({ payload }, { call, put,select }) {
-      const { form } = yield select(state => state.addUser)
+      const { form } = yield select(state => state.operatorAdd)
 
       const { code, message, data } = yield call(Service.detail, payload)
       if (!code) {
@@ -108,7 +108,7 @@ export default {
       const data = yield call(Service.add, payload)
       console.log("=======================data:",data)
       if (data.success) {
-        yield put(history.back())
+        yield put(window.history.back())
       } else {
         throw data
       }  

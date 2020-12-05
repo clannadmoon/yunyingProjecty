@@ -137,7 +137,6 @@ export default {
 
       const {success,msg,data } = yield call(dynamicRoutes);
       
-
       if (success) {
         const { success, user } = userDATA
         
@@ -166,7 +165,15 @@ export default {
         }
         store.set('routeList', routeList)
         store.set('permissions', permissions)
-        store.set('user', user)
+
+ 
+        let myUser = localStorage.getItem('sword-current-user')
+        let pp = myUser && JSON.parse(myUser)
+        let userTmp = {
+          ...pp,
+          username:pp.account
+        }
+        store.set('user', userTmp)
         store.set('isInit', true)
         goDashboard()
       } else if (queryLayout(config.layouts, locationPathname) !== 'public') {

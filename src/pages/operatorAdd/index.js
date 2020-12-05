@@ -28,8 +28,8 @@ const formItemLayout = {
   },
 }
 
-@connect(({ addUser }) => ({ addUser }))
-class UserDetail extends PureComponent {
+@connect(({ operatorAdd }) => ({ operatorAdd }))
+class Detail extends PureComponent {
   
   constructor(props) {
     super(props)
@@ -74,16 +74,16 @@ class UserDetail extends PureComponent {
     const query = location.query
     if (query.operateCode) {
       dispatch({
-        type: 'addUser/updateState',
+        type: 'operatorAdd/updateState',
         payload:{detailType:'modify'},
       })
       dispatch({
-        type: 'addUser/query',
+        type: 'operatorAdd/query',
         payload:{companyCode:query.operateCode},
       })   
     } else {
       dispatch({
-        type: 'addUser/updateState',
+        type: 'operatorAdd/updateState',
         payload: { loading:false},
       })
     }
@@ -91,7 +91,7 @@ class UserDetail extends PureComponent {
   componentWillUnmount() {
     const { dispatch } = this.props
     dispatch({
-      type: 'addUser/clear',
+      type: 'operatorAdd/clear',
       payload:{},
     })
   }
@@ -101,8 +101,8 @@ class UserDetail extends PureComponent {
  handleOk = values => {
    console.log("=====values:", values)
 
-   const { addUser, dispatch } = this.props
-   const {detailType, form} = addUser
+   const { operatorAdd, dispatch } = this.props
+   const {detailType, form} = operatorAdd
    
    let params = {
      ...values,
@@ -120,13 +120,13 @@ class UserDetail extends PureComponent {
    if (detailType === 'modify') {
      params.operateCode = form.operateCode;
     } 
-    dispatch({ type: 'addUser/add', payload: params })
+    dispatch({ type: 'operatorAdd/add', payload: params })
  }
   
 
   render() {
-    const { addUser } = this.props
-    const { form,loading,detailType } = addUser
+    const { operatorAdd } = this.props
+    const { form,loading,detailType } = operatorAdd
 
    
     
@@ -210,7 +210,7 @@ class UserDetail extends PureComponent {
               <Col span={8}>
               <FormItem name='inIndustry' rules={[{ required: false }]}
               label={'所属行业'} >
-              <Select defaultValue={industryArr[0].value } >
+              {/* <Select defaultValue={industryArr[0].value } >
               {
                 industryArr.map((item,index) => {
                   return (
@@ -218,8 +218,8 @@ class UserDetail extends PureComponent {
                   )
                 })
               }
-          </Select>
-                    
+          </Select> */}
+                     <Input />
                 </FormItem>
                 </Col>
             </Row>
@@ -411,8 +411,8 @@ class UserDetail extends PureComponent {
   }
 }
 
-UserDetail.propTypes = {
-  addUser: PropTypes.object,
+Detail.propTypes = {
+  operatorAdd: PropTypes.object,
 }
 
-export default UserDetail
+export default Detail

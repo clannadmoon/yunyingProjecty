@@ -7,12 +7,12 @@ export const routeDATA = [
     {
         "id": "1",
         "icon": "dashboard",
-        "name": "仪表盘",
+        "name": "首页",
         "zh": {
-            "name": "仪表盘"
+            "name": "首页"
         },
         "pt-br": {
-            "name": "仪表盘"
+            "name": "首页"
         },
         "route": "/dashboard"
     },

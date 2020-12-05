@@ -5,7 +5,7 @@
  */
 const { pathToRegexp } = require("path-to-regexp")
 
-import * as Service from '../../services/shopService'
+import * as Service from '../../services/operatorService'
 import { sexArr,companyTypeArr, companyStatusArr,industryArr} from '../operator/common'
 import moment from 'moment'
 
@@ -43,7 +43,7 @@ const ParamsData = {
 }
 
 export default {
-  namespace: 'merchantsAdd',
+  namespace: 'operatorAdd111',
 
   state: {
     loading:true,
@@ -55,14 +55,14 @@ export default {
   subscriptions: {
     setup({ dispatch, history }) {
       history.listen(({ pathname }) => {
-        //console.log('==============location.query', pathToRegexp('/merchantsAdd').exec(location.pathname))
+        //console.log('==============location.query', pathToRegexp('/operatorAdd').exec(location.pathname))
       })
     },
   },
 
   effects: {
     *query({ payload }, { call, put,select }) {
-      const { form } = yield select(state => state.merchantsAdd)
+      const { form } = yield select(state => state.addUser)
       const { code, message, data } = yield call(Service.detail, payload)
       if (!code) {
         let params = {

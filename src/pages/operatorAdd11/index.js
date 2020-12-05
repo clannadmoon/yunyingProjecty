@@ -28,7 +28,7 @@ const formItemLayout = {
   },
 }
 
-@connect(({ merchantsAdd }) => ({ merchantsAdd }))
+@connect(({ operatorAdd }) => ({ operatorAdd }))
 class ModifyInformation extends PureComponent {
   
   constructor(props) {
@@ -38,30 +38,27 @@ class ModifyInformation extends PureComponent {
   componentDidMount() {
     const { dispatch,location } = this.props
     const query = location.query
-
-    console.log('==========query:',query)
     
-    if (query.merchantCode) {
+    if (query.operateCode) {
       dispatch({
-        type: 'merchantsAdd/updateState',
+        type: 'operatorAdd/updateState',
         payload:{detailType:'modify'},
       })
       dispatch({
-        type: 'merchantsAdd/query',
-        payload:{merchantCode:query.merchantCode},
+        type: 'operatorAdd/query',
+        payload:{companyCode:query.operateCode},
       })   
     } else {
       dispatch({
-        type: 'merchantsAdd/updateState',
+        type: 'operatorAdd/updateState',
         payload: { loading:false},
       })
     }
   }
   componentWillUnmount() {
-    console.log('===============merchantsAdd/clear:')
     const { dispatch } = this.props
     dispatch({
-      type: 'merchantsAdd/clear',
+      type: 'operatorAdd/clear',
       payload:{},
     })
   }
@@ -69,8 +66,8 @@ class ModifyInformation extends PureComponent {
 
  
  handleOk = values => {
-   const { merchantsAdd, dispatch } = this.props
-   const {detailType, form } = merchantsAdd
+   const { operatorAdd, dispatch } = this.props
+   const {detailType, form} = operatorAdd
    
    let params = {
      ...values,
@@ -86,15 +83,15 @@ class ModifyInformation extends PureComponent {
    }
 
    if (detailType === 'modify') {
-     params.merchantCode = form.merchantCode;
+     params.operateCode = form.operateCode;
     } 
-    dispatch({ type: 'merchantsAdd/add', payload: params })
+    dispatch({ type: 'operatorAdd/add', payload: params })
  }
   
 
   render() {
-    const { merchantsAdd } = this.props
-    const { form,loading,detailType } = merchantsAdd
+    const { operatorAdd } = this.props
+    const { form,loading,detailType } = operatorAdd
 
    
     
@@ -380,7 +377,7 @@ class ModifyInformation extends PureComponent {
 }
 
 ModifyInformation.propTypes = {
-  merchantsAdd: PropTypes.object,
+  operatorAdd: PropTypes.object,
 }
 
 export default ModifyInformation
