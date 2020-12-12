@@ -100,18 +100,6 @@ export default {
       
       // const { locationQuery } = yield select(_ => _.app)
 
-      // if (data.success) {
-      //   const { from } = locationQuery
-      //   yield put({ type: 'app/query' })
-      //   if (!pathToRegexp('/login').exec(from)) {
-      //     if (['', '/'].includes(from)) history.push('/dashboard')
-      //     else history.push(from)
-      //   } else {
-      //     history.push('/dashboard')
-      //   }
-      // } else {
-      //   throw data
-      // }
     },
     *logout(_, { put }) {
       yield put({

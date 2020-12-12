@@ -9,7 +9,7 @@ const isDevelopment = process.env.NODE_ENV === 'development'
 export default {
   // IMPORTANT! change next line to yours or delete. And hide in dev
   //publicPath: isDevelopment ? '/' : 'http://39.100.8.164:9200/',
-  publicPath: isDevelopment ? '/' : './',
+  publicPath: isDevelopment ? '/' : '/',
   alias: {
     api: resolve(__dirname, './src/services/'),
     components: resolve(__dirname, './src/components'),
@@ -45,6 +45,7 @@ export default {
       'ant-design-icons',
     ],
   ],
+  //exportStatic: {},
   hash: true,
   ignoreMomentLocale: true,
   // umi3 comple node_modules by default, could be disable

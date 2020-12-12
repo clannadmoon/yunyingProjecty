@@ -83,7 +83,7 @@ class Filter extends Component {
           <Col {...ColProps} xl={{ span: 6 }} md={{ span: 8 }}>
             <Form.Item
               label="商户名称"
-              name="orgName">
+              name="merchantName">
               <Search
                 placeholder={`请输入商户名称`}
                 onSearch={this.handleSubmit}

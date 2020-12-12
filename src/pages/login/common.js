@@ -8,23 +8,11 @@ export const routeDATA = [
         "id": "1",
         "icon": "dashboard",
         "name": "首页",
-        "zh": {
-            "name": "首页"
-        },
-        "pt-br": {
-            "name": "首页"
-        },
         "route": "/dashboard"
     },
     {
         "id": "2",
         "name": "运营商管理",
-        "zh": {
-            "name": "运营商管理"
-        },
-        "pt-br": {
-            "name": "运营商管理"
-        },
         "icon": "user",
         "route": "/operator"
     },
@@ -33,12 +21,6 @@ export const routeDATA = [
         "menuParentId": "-1",
         "breadcrumbParentId": "2",
         "name": "运营商信息",
-        "zh": {
-            "name": "运营商信息"
-        },
-        "pt-br": {
-            "name": "运营商信息"
-        },
         "route": "/operator/:id"
     },
     {
@@ -46,23 +28,11 @@ export const routeDATA = [
         "menuParentId": "-1",
         "breadcrumbParentId": "2",
         "name": "运营商信息",
-        "zh": {
-            "name": "运营商信息"
-        },
-        "pt-br": {
-            "name": "运营商信息"
-        },
         "route": "/operatorAdd"
     },
     {
         "id": "3",
         "name": "商户管理",
-        "zh": {
-            "name": "商户管理"
-        },
-        "pt-br": {
-            "name": "商户信息"
-        },
         "icon": "shop",
         "route": "/merchants"
     },
@@ -71,12 +41,6 @@ export const routeDATA = [
         "menuParentId": "-1",
         "breadcrumbParentId": "3",
         "name": "商户信息",
-        "zh": {
-            "name": "商户信息"
-        },
-        "pt-br": {
-            "name": "商户信息"
-        },
         "route": "/merchants/:id"
     },
     {
@@ -84,12 +48,6 @@ export const routeDATA = [
         "menuParentId": "-1",
         "breadcrumbParentId": "3",
         "name": "商户信息",
-        "zh": {
-            "name": "商户信息"
-        },
-        "pt-br": {
-            "name": "商户信息"
-        },
         "route": "/merchantsAdd"
     },
 ];

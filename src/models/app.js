@@ -8,7 +8,7 @@ import { ROLE_TYPE } from 'utils/constant'
 import { queryLayout } from 'utils'
 import { CANCEL_REQUEST_MESSAGE } from 'utils/constant'
 import {getAccessToken,removeAll} from '../utils/authority'
-import { dynamicRoutes } from '../services/menu';
+import { dynamicRoutes,dynamicButtons } from '../services/menu';
 
 import config from 'config'
 
@@ -136,6 +136,8 @@ export default {
       const { locationPathname } = yield select(_ => _.app)
 
       const {success,msg,data } = yield call(dynamicRoutes);
+     // const responseRoutes = yield call(dynamicRoutes);
+      const responseButtons = yield call(dynamicButtons);
       
       if (success) {
         const { success, user } = userDATA
@@ -144,29 +146,17 @@ export default {
         //const list = handleRoute(data)
         console.log('>>>>>>>>>>>list:',list)
         const { permissions } = user
+        
+
+        //设置路由
         let routeList = list
-        if (true) {
-        // if (
-        //   permissions.role === ROLE_TYPE.ADMIN ||
-        //   permissions.role === ROLE_TYPE.DEVELOPER
-        // ) {
-          permissions.visit = list.map(item => item.id)
-        } else {
-          routeList = list.filter(item => {
-            const cases = [
-              permissions.visit.includes(item.id),
-              item.mpid
-                ? permissions.visit.includes(item.mpid) || item.mpid === '-1'
-                : true,
-              item.bpid ? permissions.visit.includes(item.bpid) : true,
-            ]
-            return cases.every(_ => _)
-          })
-        }
         store.set('routeList', routeList)
+
+        // todo 设置权限 （暂时所有页面都可访问）
+        permissions.visit = list.map(item => item.id)
         store.set('permissions', permissions)
 
- 
+        //设置用户信息
         let myUser = localStorage.getItem('sword-current-user')
         let pp = myUser && JSON.parse(myUser)
         let userTmp = {
@@ -174,6 +164,8 @@ export default {
           username:pp.account
         }
         store.set('user', userTmp)
+
+
         store.set('isInit', true)
         goDashboard()
       } else if (queryLayout(config.layouts, locationPathname) !== 'public') {
@@ -187,8 +179,8 @@ export default {
     },
 
     *signOut({ payload }, { call, put }) {
-      //const data = yield call(logoutUser)
-      //if (data.success) {
+      // const data = yield call(logoutUser)
+      // if (data.success) {
       removeAll();
         store.set('routeList', [])
         store.set('permissions', { visit: [] })

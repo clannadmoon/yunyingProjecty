@@ -1,3 +1,8 @@
+/*
+ * @Description: 这里输入文件功能
+ * @Author: zhoupeng
+ * @Date: 2020-11-21 10:47:10
+ */
 import { stringify } from 'qs';
 import request from '../utils/request';
 import func from '../utils/Func';
@@ -11,6 +16,7 @@ export async function dynamicRoutes() {
 export async function dynamicButtons() {
   return request('/api/blade-system/menu/buttons');
 }
+
 
 export async function list(params) {
   return request(`/api/blade-system/menu/list?${stringify(params)}`);

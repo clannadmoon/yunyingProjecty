@@ -75,13 +75,13 @@ class List extends PureComponent {
         render: (text, record) => {
           return (
             <div className={styles.detailContainer}>
-              <span onClick={() => {
+              <span className='hover' onClick={() => {
                 this.handleChange(record)
               }}>修改</span>
-              <span onClick={() => {
+              <span className='hover' onClick={() => {
                 this.handelDate(record)
               }}>设置</span>
-              <span onClick={() => {
+              <span className='hover' onClick={() => {
                 this.handleMenuClick(record)
               }}>{!record.enableFlag ? '启用' : '禁用'}</span>
             </div>

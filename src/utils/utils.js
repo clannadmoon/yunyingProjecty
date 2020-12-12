@@ -178,38 +178,95 @@ export function formatWan(val) {
   return result;
 }
 
+// export function formatRoutes(routes) {
+//   function format(arr) {
+//     arr.forEach(node => {
+//       const item = node;
+//       if (item.children && Array.isArray(item.children)) {
+//         item.routes = item.children;
+//         format(item.routes);
+//       }
+//       if (item.isOpen === 2) {
+//         item.target = '_blank';
+//       }
+//       item.name = item.code;
+//       if (item.source) {
+//         item.icon = item.source;
+//       }
+//       delete item.id;
+//       delete item.parentId;
+//       delete item.sort;
+//       delete item.code;
+//       delete item.source;
+//       delete item.children;
+//     });
+//     return arr;
+//   }
+//   return format(routes);
+// }
+
 export function formatRoutes(routes) {
-  function format(arr) {
-    arr.forEach(node => {
-      const item = node;
+  let routesArr = [];
+  function format(arr,parentItem) { 
+    arr.forEach(item => {
       if (item.children && Array.isArray(item.children)) {
-        item.routes = item.children;
-        format(item.routes);
+        format(item.children,item);
       }
-      if (item.isOpen === 2) {
-        item.target = '_blank';
+      let outObj = {
+        id: item.id,
+        menuParentId: parentItem && parentItem.id ? parentItem.id :'-1',
+        breadcrumbParentId: parentItem && parentItem.id ? parentItem.id :'-1',
+        name: item.name,
+        code: item.code,
+        route: item.path,
       }
-      item.name = item.code;
       if (item.source) {
-        item.icon = item.source;
+        outObj.icon = item.source;
       }
-      delete item.id;
-      delete item.parentId;
-      delete item.sort;
-      delete item.code;
-      delete item.source;
-      delete item.children;
+      routesArr.push(outObj)
     });
-    return arr;
   }
-  return format(routes);
+  format(routes, null);
+  return routesArr;
 }
 
+// export function formatButtons(buttons) {
+//   return buttons.map(item => {
+//     return {
+//       code: item.code,
+//       buttons: item.children,
+//     };
+//   });
+// }
+
 export function formatButtons(buttons) {
-  return buttons.map(item => {
-    return {
-      code: item.code,
-      buttons: item.children,
-    };
-  });
+  let routesArr = [];
+  function format(arr,parentItem) { 
+    arr.forEach(item => {
+      if (item.children && Array.isArray(item.children)) {
+        format(item.children,item);
+      }
+
+      // if () {
+        
+      // }
+
+      let outObj = {
+        id: item.id,
+        menuParentId: parentItem && parentItem.id ? parentItem.id :'-1',
+        breadcrumbParentId: parentItem && parentItem.id ? parentItem.id :'-1',
+        name: item.name,
+        code: item.code,
+        route: item.path,
+      }
+      if (item.source) {
+        outObj.icon = item.source;
+      }
+      routesArr.push(outObj)
+    });
+  }
+  format(buttons, null);
+  return routesArr;
 }
+
+

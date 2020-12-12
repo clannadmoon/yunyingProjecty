@@ -40,7 +40,7 @@ class Detail extends PureComponent {
       <Page inner>
         <div className={styles.content}>
         <Descriptions title="企业工商信息">
-            <Descriptions.Item label="运营商企业名称">{ data.merchantName ? data.merchantName :'-'}</Descriptions.Item>
+            <Descriptions.Item label="商户企业名称">{ data.merchantName ? data.merchantName :'-'}</Descriptions.Item>
             <Descriptions.Item label="统一社会信用代码">{data.creditNumber ? data.creditNumber : '-'}</Descriptions.Item>
             <Descriptions.Item label="纳税人识别号">{ data.taxpayerNumber ? data.taxpayerNumber :'-'}</Descriptions.Item>
             <Descriptions.Item label="工商注册号">{ data.registrationNumber ? data.registrationNumber :'-'}</Descriptions.Item>
